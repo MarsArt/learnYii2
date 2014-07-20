@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
  */
 
 $this->title = $model->Name;
-$this->params['breadcrumbs'][] = ['label' => 'Tovaris', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tovari-view">
@@ -17,11 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idtovari], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idtovari], [
+        <?= Html::a('Сохранить', ['update', 'id' => $model->idtovari], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->idtovari], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены что хотите удалить этот товар?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idtovari',
             'Name',
             'Descr',
             'CenaZak',

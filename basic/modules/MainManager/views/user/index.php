@@ -5,20 +5,20 @@ use yii\grid\GridView;
 
 /**
  * @var yii\web\View $this
- * @var app\modules\MainManager\models\TovariSearch $searchModel
+ * @var app\models\UsersSearch $searchModel
  * @var yii\data\ActiveDataProvider $dataProvider
  */
 
-$this->title = 'Товары';
+$this->title = 'Сотрудники';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tovari-index">
+<div class="users-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Добавить товар', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить сотрудника', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,9 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
             'Name',
-            'Descr',
-            'CenaZak',
+            'Password',
+            'Type',
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

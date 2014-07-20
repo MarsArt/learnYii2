@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -28,7 +29,7 @@ AppAsset::register($this);
         <?php
             NavBar::begin([
                 'brandLabel' => 'Управление бизнесом',
-                'brandUrl' => Yii::$app->homeUrl,
+                'brandUrl' => Url::toRoute('/MainManager'),
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
@@ -36,9 +37,19 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
+                    ['label' => 'Вход', 'url' => ['/MainManager']],
+                    ['label' => 'Выручки', 'url' => ['/MainManager/viruchki'],
+                     'items'=>[
+                            ['label'=>'Выручки через SQLdataProvider', 'url'=>['/MainManager/viruchki/index',['id'=>'1']]],
+                            ['label'=>'Выручки через View', 'url'=>['/MainManager/viruchki/index1']],
+                        ],
+                     ],
+                    ['label' => 'Деньги', 'url' => ['/MainManager/dengi']],
+                    ['label' => 'Товары', 'url' => ['/MainManager/tovari/index']],
+                    ['label' => 'Магазины', 'url' => ['/MainManager/shop']],
+                    ['label' => 'Сотрудники', 'url' => ['/MainManager/user']],
+                    ['label' => 'Заявки', 'url' => ['/MainManager/zajavki']],
+
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/site/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -59,7 +70,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+            <p class="pull-left">&copy; Busines <?= date('Y') ?></p>
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>

@@ -4,14 +4,14 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var app\modules\MainManager\models\Tovari $model
+ * @var app\models\Users $model
  */
 
-$this->title = 'Добавление товара';
-$this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['index']];
+$this->title = 'Добавить сотрудника';
+$this->params['breadcrumbs'][] = ['label' => 'Сотрудники', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tovari-create">
+<div class="users-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

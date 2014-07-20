@@ -2,17 +2,18 @@
 
 namespace app\modules\MainManager\controllers;
 
+use app\models\Users;
 use Yii;
-use app\modules\MainManager\models\Tovari;
-use app\modules\MainManager\models\TovariSearch;
+use app\modules\MainManager\models\Shop;
+use app\modules\MainManager\models\ShopSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TovariController implements the CRUD actions for Tovari model.
+ * ShopController implements the CRUD actions for Shop model.
  */
-class TovariController extends Controller
+class ShopController extends Controller
 {
     public function behaviors()
     {
@@ -27,14 +28,13 @@ class TovariController extends Controller
     }
 
     /**
-     * Lists all Tovari models.
+     * Lists all Shop models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TovariSearch();
+        $searchModel = new ShopSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -42,8 +42,8 @@ class TovariController extends Controller
     }
 
     /**
-     * Displays a single Tovari model.
-     * @param integer $id
+     * Displays a single Shop model.
+     * @param string $id
      * @return mixed
      */
     public function actionView($id)
@@ -54,48 +54,52 @@ class TovariController extends Controller
     }
 
     /**
-     * Creates a new Tovari model.
+     * Creates a new Shop model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Tovari();
+        $model = new Shop();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
-            //return $this->redirect(['view', 'id' => $model->idtovari]);
+           // return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $listAdmin=Users::getListUsers();
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model,'listAdmin'=>$listAdmin
             ]);
         }
     }
 
     /**
-     * Updates an existing Tovari model.
+     * Updates an existing Shop model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
-            //return $this->redirect(['view', 'id' => $model->idtovari]);
+          //  return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $listAdmin=Users::getListUsers();
             return $this->render('update', [
-                'model' => $model,
+                'model' => $model, 'listAdmin'=>$listAdmin
             ]);
         }
     }
 
     /**
-     * Deletes an existing Tovari model.
+     * Deletes an existing Shop model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -106,15 +110,15 @@ class TovariController extends Controller
     }
 
     /**
-     * Finds the Tovari model based on its primary key value.
+     * Finds the Shop model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Tovari the loaded model
+     * @param string $id
+     * @return Shop the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tovari::findOne($id)) !== null) {
+        if (($model = Shop::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

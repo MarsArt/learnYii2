@@ -14,6 +14,11 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'request' => [
+            'enableCookieValidation' => false,
+            'enableCsrfValidation' => false,
+            'cookieValidationKey' => 'xxxxxxx',
+        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
@@ -42,6 +47,9 @@ $config = [
     'modules' => [
         'MainManager' => [
             'class' => 'app\modules\MainManager\MainManager',
+            'layoutPath'=>'@app/modules/MainManager/views/layouts',
+            'layout'=>'main',
+
         ],
     ],
 

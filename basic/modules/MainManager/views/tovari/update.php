@@ -7,10 +7,10 @@ use yii\helpers\Html;
  * @var app\modules\MainManager\models\Tovari $model
  */
 
-$this->title = 'Update Tovari: ' . ' ' . $model->Name;
-$this->params['breadcrumbs'][] = ['label' => 'Tovaris', 'url' => ['index']];
+$this->title = 'Редактирование товара: ' . ' ' . $model->Name;
+$this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->Name, 'url' => ['view', 'id' => $model->idtovari]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="tovari-update">
 

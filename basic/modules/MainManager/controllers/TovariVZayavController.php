@@ -3,16 +3,16 @@
 namespace app\modules\MainManager\controllers;
 
 use Yii;
-use app\modules\MainManager\models\Tovari;
-use app\modules\MainManager\models\TovariSearch;
+use app\models\TovariVZayav;
+use app\models\TovariVZayavSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TovariController implements the CRUD actions for Tovari model.
+ * TovariVZayavController implements the CRUD actions for TovariVZayav model.
  */
-class TovariController extends Controller
+class TovariVZayavController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class TovariController extends Controller
     }
 
     /**
-     * Lists all Tovari models.
+     * Lists all TovariVZayav models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TovariSearch();
+        $searchModel = new TovariVZayavSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class TovariController extends Controller
     }
 
     /**
-     * Displays a single Tovari model.
+     * Displays a single TovariVZayav model.
      * @param integer $id
      * @return mixed
      */
@@ -54,17 +54,16 @@ class TovariController extends Controller
     }
 
     /**
-     * Creates a new Tovari model.
+     * Creates a new TovariVZayav model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Tovari();
+        $model = new TovariVZayav();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-            //return $this->redirect(['view', 'id' => $model->idtovari]);
+            return $this->redirect(['view', 'id' => $model->idtovariVZalav]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -73,7 +72,7 @@ class TovariController extends Controller
     }
 
     /**
-     * Updates an existing Tovari model.
+     * Updates an existing TovariVZayav model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -83,8 +82,7 @@ class TovariController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-            //return $this->redirect(['view', 'id' => $model->idtovari]);
+            return $this->redirect(['view', 'id' => $model->idtovariVZalav]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,7 +91,7 @@ class TovariController extends Controller
     }
 
     /**
-     * Deletes an existing Tovari model.
+     * Deletes an existing TovariVZayav model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -106,15 +104,15 @@ class TovariController extends Controller
     }
 
     /**
-     * Finds the Tovari model based on its primary key value.
+     * Finds the TovariVZayav model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Tovari the loaded model
+     * @return TovariVZayav the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tovari::findOne($id)) !== null) {
+        if (($model = TovariVZayav::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

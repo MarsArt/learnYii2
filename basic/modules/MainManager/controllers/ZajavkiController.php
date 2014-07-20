@@ -2,17 +2,19 @@
 
 namespace app\modules\MainManager\controllers;
 
+
+use app\models\TovariVZayavSearch;
 use Yii;
-use app\modules\MainManager\models\Tovari;
-use app\modules\MainManager\models\TovariSearch;
+use app\models\Zajavki;
+use app\models\ZajavkiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TovariController implements the CRUD actions for Tovari model.
+ * ZajavkiController implements the CRUD actions for Zajavki model.
  */
-class TovariController extends Controller
+class ZajavkiController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +29,12 @@ class TovariController extends Controller
     }
 
     /**
-     * Lists all Tovari models.
+     * Lists all Zajavki models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TovariSearch();
+        $searchModel = new ZajavkiSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -41,30 +43,41 @@ class TovariController extends Controller
         ]);
     }
 
+
+
     /**
-     * Displays a single Tovari model.
+     * Displays a single Zajavki model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
+        $ZajavkaInfo=$this->findModel($id);
+        $contentZajavSerch=new TovariVZayavSearch();
+        $contentZajavProvider=$contentZajavSerch->searchToShow(Yii::$app->request->queryParams, $id)['dataProvider'];
+      /* echo '<hr><br><br><br><br><br><br><br><br><br>';
+        echo 'asdasd';
+          var_dump(TovariVZayavSearch::getSumModel($contentZajavProvider,['sumPos','Cena']));
+       // $SumModel=/*Исходя из провайдера построить сумму*/
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $ZajavkaInfo,
+            'contentZajavProvider'=>$contentZajavProvider,
+            'contentZajavSerch'=>$contentZajavSerch,
+            //'Summary'=>$SumModel;
         ]);
     }
 
     /**
-     * Creates a new Tovari model.
+     * Creates a new Zajavki model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Tovari();
+        $model = new Zajavki();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-            //return $this->redirect(['view', 'id' => $model->idtovari]);
+            return $this->redirect(['view', 'id' => $model->idZajavki]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -73,7 +86,7 @@ class TovariController extends Controller
     }
 
     /**
-     * Updates an existing Tovari model.
+     * Updates an existing Zajavki model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -82,9 +95,9 @@ class TovariController extends Controller
     {
         $model = $this->findModel($id);
 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-            //return $this->redirect(['view', 'id' => $model->idtovari]);
+            return $this->redirect(['view', 'id' => $model->idZajavki]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,7 +106,7 @@ class TovariController extends Controller
     }
 
     /**
-     * Deletes an existing Tovari model.
+     * Deletes an existing Zajavki model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -106,15 +119,15 @@ class TovariController extends Controller
     }
 
     /**
-     * Finds the Tovari model based on its primary key value.
+     * Finds the Zajavki model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Tovari the loaded model
+     * @return Zajavki the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tovari::findOne($id)) !== null) {
+        if (($model = Zajavki::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
